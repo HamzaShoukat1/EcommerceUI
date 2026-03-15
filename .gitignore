@@ -40,5 +40,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-
-# grid w-full gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
