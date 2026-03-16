@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import { Bell, Home, ShoppingCart } from "lucide-react";
+import ShoppingCartIcon from "./ShoppingCartIcon";
 export default function Navbar() {
     return (
         <nav className="w-full flex items-center justify-between border-b border-t-gray-200 pb-4">
@@ -19,7 +20,7 @@ export default function Navbar() {
                     <Home  className="w-4 h-4 text-gray-600"/>
                 </Link>
                 <Bell  className="w-4 h-4 text-gray-600 cursor-pointer"/>
-                <ShoppingCart className="w-4 h-4 text-gray-600 cursor-pointer" />
+                <ShoppingCartIcon />
                 <Link href={"/login"}>
                 Sign in
                 </Link>

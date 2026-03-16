@@ -1,5 +1,5 @@
 import Image from "next/image"
-import ProductList from "./src/components/shared/ProductList"
+import ProductList from "@/components/shared/ProductList"
 
 export default async function Homepage({ searchParams }: { searchParams: Promise<{ category: string }> }) {
   const category = (await searchParams).category

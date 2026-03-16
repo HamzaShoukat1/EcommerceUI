@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { ProductsType } from "../../types";
+import { ProductsType } from "../app/src/types";
 import Categories from "./Categories";
 import ProductCard from "./ProductCard";
 import Filter from "./Filter";

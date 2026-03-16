@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ProductType } from "../../types";
+import { ProductType } from "../app/src/types";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
