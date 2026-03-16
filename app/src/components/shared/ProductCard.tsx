@@ -4,15 +4,35 @@ import Link from "next/link";
 import { ProductType } from "../../types";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
 export default function ProductCard({ product }: { product: ProductType }) {
+  const [productsetType, setproductsetType] = useState({
+    size: product.sizes[0],
+    color: product.colors[0]
+  })
+  type producttype = {
+    type: "size" | "color"
+    value: string
+  }
+  const handleProductType = ({ type, value }: producttype) => {
+    setproductsetType((prev)=> ({
+      ...prev,
+      [type]:value
+    }))
+
+
+  }
+
+
+
   return (
     <div className="shadow-lg rounded-lg overflow-hidden bg-white">
       {/* Product Image */}
       <Link href={`/products/${product.id}`}>
         <div className="relative w-full aspect-2/3">
           <Image
-            src={product.images[product.colors[0]]}
+            src={product.images[productsetType.color]}
             alt={product.name}
             fill
             className="object-cover hover:scale-105 transition-transform duration-300"
@@ -34,6 +54,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
               name="size"
               id="size"
               className="cursor-pointer ring ring-gray-300 rounded-md px-2 py-1"
+              onChange={(e) => handleProductType({ type: "size", value: e.target.value })}
             >
               {product.sizes.map((size) => (
                 <option key={size} value={size} className="cursor-pointer">
@@ -48,7 +69,8 @@ export default function ProductCard({ product }: { product: ProductType }) {
             <span className="text-gray-500">Color</span>
             <div className="flex items-center gap-2">
               {product.colors.map((color) => (
-                <div key={color} className="">
+                <div key={color} className={`cursor-pointer border ${productsetType.color === color ? "border-gray-400" : "border-gray-200"} rounded-full p-[1.2px]` } onClick={() => handleProductType({ type: "color", value: color })}
+                >
                   <div
                     className="w-4 h-4 rounded-full border border-gray-300"
                     style={{ backgroundColor: color }}
@@ -63,7 +85,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
         <div className="flex items-center gap-2 justify-between mt-2">
           <p className="font-medium">${product.price.toFixed(2)}</p>
           <button className="flex items-center gap-2 bg-white text-black shadow-md text-xs rounded-md px-3 py-1  cursor-pointer hover:bg-black hover:text-white hover:ring-1 hover:ring-gray-400 transition-all duration-300">
-            <ShoppingCart className="w-4 h-4"/>
+            <ShoppingCart className="w-4 h-4" />
             Add to Cart
 
           </button>

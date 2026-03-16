@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ProductsType } from "../../types";
 import Categories from "./Categories";
 import ProductCard from "./ProductCard";
+import Filter from "./Filter";
 
 // TEMPORARY
 const products: ProductsType = [
@@ -116,18 +117,26 @@ const products: ProductsType = [
     },
 ]
 
-export default function ProductList() {
+export default function ProductList({ category, params }: { category: string, params: "homepage" | "products" }) {
     return (
         <div className="w-full">
             <Categories />
+            {params === "products" && <Filter />}
             <div className="grid  gap-4 grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
-                {products.map((product)=>(
-                    <ProductCard key={product.id}  product={product}/>
+                {products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
 
                 ))}
 
             </div>
 
+
+            <Link
+                href={category ? `/products?category=${category}` : "/products"}
+                className="flex justify-end mt-4 underline text-gray-500 text-sm"
+            >
+                View all Products
+            </Link>
         </div>
     )
 }
