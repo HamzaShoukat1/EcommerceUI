@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ProductType } from "../app/src/types";
+import { ProductType } from "@/app/types";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
@@ -16,9 +16,9 @@ export default function ProductCard({ product }: { product: ProductType }) {
     value: string
   }
   const handleProductType = ({ type, value }: producttype) => {
-    setproductsetType((prev)=> ({
+    setproductsetType((prev) => ({
       ...prev,
-      [type]:value
+      [type]: value
     }))
 
 
@@ -69,7 +69,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
             <span className="text-gray-500">Color</span>
             <div className="flex items-center gap-2">
               {product.colors.map((color) => (
-                <div key={color} className={`cursor-pointer border ${productsetType.color === color ? "border-gray-400" : "border-gray-200"} rounded-full p-[1.2px]` } onClick={() => handleProductType({ type: "color", value: color })}
+                <div key={color} className={`cursor-pointer border ${productsetType.color === color ? "border-gray-400" : "border-gray-200"} rounded-full p-[1.2px]`} onClick={() => handleProductType({ type: "color", value: color })}
                 >
                   <div
                     className="w-4 h-4 rounded-full border border-gray-300"
