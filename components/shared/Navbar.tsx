@@ -1,9 +1,10 @@
-
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import { Bell, Home } from "lucide-react";
 import ShoppingCartIcon from "./ShoppingCartIcon";
+import ClientOnly from "@/app/hooks/onlyClient";
 export default function Navbar() {
     return (
         <nav className="w-full flex items-center justify-between border-b border-t-gray-200 pb-4">
@@ -20,7 +21,10 @@ export default function Navbar() {
                     <Home  className="w-4 h-4 text-gray-600"/>
                 </Link>
                 <Bell  className="w-4 h-4 text-gray-600 cursor-pointer"/>
+                <ClientOnly>
+
                 <ShoppingCartIcon />
+                </ClientOnly>
                 <Link href={"/login"}>
                 Sign in
                 </Link>

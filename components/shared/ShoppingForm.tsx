@@ -1,10 +1,14 @@
 "use client"
 
-import { cartItems } from "@/app/(pages)/cart/page"
+import { useAppDispatch, useAppSelector } from "@/app/hooks/usereduxhook"
 import { Trash2 } from "lucide-react"
+import { removeFromCart } from "@/app/Store/features/cartSlice"
 
 import Image from "next/image"
 export default function ShoppingForm() {
+    const dispatch = useAppDispatch()
+    const cartItems = useAppSelector(state=>state.cart.cartItems)
+
   return (
     <div>
       {
@@ -14,7 +18,14 @@ export default function ShoppingForm() {
                 {/* //image   */}
                 <div className="flex gap-8">
                   <div className="relative w-30 h-30 bg-gray-100 rounded-lg overflow-hidden">
-                    <Image src={item.images[item.selectedColor]} alt={item.name} fill className="object-contain" />
+                {item.images[item.selectedColor] && (
+  <Image
+    src={item.images[item.selectedColor]}
+    alt={item.name}
+    fill
+    className="object-contain"
+  />
+)}
                   </div>
                   {/* //detials  */}
                   <div className="flex flex-col">
@@ -30,7 +41,7 @@ export default function ShoppingForm() {
 
                 </div>
                 {/* //delt button  */}
-                <button className="w-6 h-6 rounded-full hover:bg-red-300 transition-all duration-300  bg-red-200 flex items-center justify-center cursor-pointer">
+                <button onClick={()=>dispatch(removeFromCart(item.id))} className="w-6 h-6 rounded-full hover:bg-red-300 transition-all duration-300  bg-red-200 flex items-center justify-center cursor-pointer">
                   <Trash2  className="w-3 h-3"/>
                 </button>
 

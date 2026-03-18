@@ -5,12 +5,16 @@ import { ProductType } from "@/app/types";
 import Image from "next/image";
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { useAppDispatch } from "@/app/hooks/usereduxhook";
+import { addToCart } from "@/app/Store/features/cartSlice";
 
 export default function ProductCard({ product }: { product: ProductType }) {
+  const dispatch = useAppDispatch()
   const [productsetType, setproductsetType] = useState({
     size: product.sizes[0],
     color: product.colors[0]
   })
+  console.log(productsetType)
   type producttype = {
     type: "size" | "color"
     value: string
@@ -23,7 +27,15 @@ export default function ProductCard({ product }: { product: ProductType }) {
 
 
   }
+const handelAddtoCart = ()=> {
+  dispatch(addToCart({
+    ...product,
+    quantity:1,
+    selectedSize:productsetType.size,
+    selectedColor:productsetType.color
+  }))
 
+}
 
 
   return (
@@ -84,7 +96,7 @@ export default function ProductCard({ product }: { product: ProductType }) {
         {/* Price & Cart Button */}
         <div className="flex items-center gap-2 justify-between mt-2">
           <p className="font-medium">${product.price.toFixed(2)}</p>
-          <button className="flex items-center gap-2 bg-white text-black shadow-md text-xs rounded-md px-3 py-1  cursor-pointer hover:bg-black hover:text-white hover:ring-1 hover:ring-gray-400 transition-all duration-300">
+          <button onClick={handelAddtoCart} className="flex items-center gap-2 bg-white text-black shadow-md text-xs rounded-md px-3 py-1  cursor-pointer hover:bg-black hover:text-white hover:ring-1 hover:ring-gray-400 transition-all duration-300">
             <ShoppingCart className="w-4 h-4" />
             Add to Cart
 
