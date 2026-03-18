@@ -7,18 +7,18 @@ import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from "react-hook-form"
 
 
-export default function ShippingAdressForm({setShippingform}: {setShippingform:(data:shippingformInputs) => void }) {
+export default function ShippingAdressForm({ setShippingform }: { setShippingform: (data: shippingformInputs) => void }) {
   const router = useRouter()
 
 
-  const { register, handleSubmit, formState: {errors}} = useForm<shippingformInputs>({
+  const { register, handleSubmit, formState: { errors } } = useForm<shippingformInputs>({
     resolver: zodResolver(shippingFormSchema)
   })
   const handleSubmitShipping: SubmitHandler<shippingformInputs> = (data) => {
-    
+
     setShippingform(data)
-    
-    router.push("/cart?step=3",{scroll:false})
+
+    router.push("/cart?step=3", { scroll: false })
     console.log(data)
   }
   return (

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { CartItemsType } from "@/app/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CartItemsType, ProductsType, ProductType } from "@/app/types";
 
 
 
@@ -35,25 +35,43 @@ const CartSlice = createSlice({
 
   reducers: {
     // ✅ ADD TO CART
-    addToCart: (state, action) => {
-      const item = action.payload;
+ addToCart: (state, action) => {
+  const { product, quantity, selectedColor, selectedSize } = action.payload;
 
-      const existing = state.cartItems.find((i) => i.id === item.id);
+  // 🛡️ safety check
+  if (!product) return;
 
-      if (existing) {
-        existing.quantity += 1;
-      } else {
-        state.cartItems.push({ ...item, quantity: 1 });
-      }
+  const existing = state.cartItems.find(
+    (i) =>
+      i.id === product.id &&
+      i.selectedColor === selectedColor &&
+      i.selectedSize === selectedSize
+  );
 
-      calculateTotals(state);
-    },
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    state.cartItems.push({
+      ...product,
+      quantity,
+      selectedColor,
+      selectedSize,
+    });
+  }
+
+  calculateTotals(state);
+},
 
     // ✅ REMOVE FROM CART
     removeFromCart: (state, action) => {
-      const id = action.payload;
-
-      state.cartItems = state.cartItems.filter((item) => item.id !== id);
+      const {id,selectedColor,selectedSize} = action.payload
+      state.cartItems = state.cartItems.filter(item=> 
+      !(
+        item.id === id &&
+        item.selectedColor === selectedColor &&
+        item.selectedSize === selectedSize
+      )
+      )
 
       calculateTotals(state);
     },

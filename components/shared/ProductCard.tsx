@@ -29,8 +29,8 @@ export default function ProductCard({ product }: { product: ProductType }) {
   }
 const handelAddtoCart = ()=> {
   dispatch(addToCart({
-    ...product,
-    quantity:1,
+    product,
+    quantity:1 ,
     selectedSize:productsetType.size,
     selectedColor:productsetType.color
   }))
