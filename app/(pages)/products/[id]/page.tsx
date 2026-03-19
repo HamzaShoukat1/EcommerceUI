@@ -3,6 +3,7 @@ import {  ProductType } from "@/app/types"
 import Image from "next/image"
 import ProductInteraction from "@/components/shared/ProductInteraction"
 
+
 const product: ProductType = {
     id: 1,
     name: "Nike Dri Flex T-Shirt",
@@ -16,6 +17,14 @@ const product: ProductType = {
     images: { white: "/products/4w.png", pink: "/products/4p.png" },
 }
 
+export const generateMetadata =  async ({params}:{params:{id:string}})=> {
+    return {
+        title:product.name,
+        describe:product.description
+    }
+ 
+
+}
 export default async function Page({
     params,
     searchParams,
