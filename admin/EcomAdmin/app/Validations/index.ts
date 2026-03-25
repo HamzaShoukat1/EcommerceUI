@@ -117,8 +117,16 @@ export type Product = {
 export type Payment = {
   id: string;
   amount: number;
-  fullName: string;
+  FullName: string;
   userId:string
   email: string;
   status: "pending" | "processing" | "success" | "failed";
+};
+export type User = {
+  id: string;
+  avatar: string;
+  fullName: string;
+  email: string;
+
+  status: "active" | "inactive";
 };

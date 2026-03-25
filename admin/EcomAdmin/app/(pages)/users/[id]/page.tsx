@@ -1,5 +1,3 @@
-import { Badge } from "@/components/ui/badge";
-import CardList from "@/components/shared/CardList";
 import {
   Breadcrumb,
   BreadcrumbItem,
